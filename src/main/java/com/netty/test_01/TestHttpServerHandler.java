@@ -14,7 +14,14 @@ import java.net.URI;
  */
 public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
-    //读取客户端发过来的请求，并且向客户端返回相应的方法
+    /**
+     * 每当服务端接收到消息时，都会调用
+     * 不过由服务器发送的消息可能会被分块接收，也就是说服务器发送了5字节，那么不能保证这5字节一次性接收
+     * 所以，此方法有可能会被调用多次
+     * @param channelHandlerContext
+     * @param msg
+     * @throws Exception
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, HttpObject msg) throws Exception {
         // 这个判断不知道是做什么的
@@ -40,7 +47,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 
 
     /**
-     * 当通道变成活动状态的时候执行的方法
+     * 在到服务器的连接已经建立之后将被调用
      *
      * @param ctx
      * @throws Exception
@@ -79,5 +86,17 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel Unregistered");
         super.channelUnregistered(ctx);
+    }
+
+    /**
+     * 在服务端处理过程中引发异常时被调用
+     * @param ctx
+     * @param cause
+     * @throws Exception
+     */
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("发生了异常");
+        super.exceptionCaught(ctx, cause);
     }
 }

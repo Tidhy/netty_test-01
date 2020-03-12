@@ -13,6 +13,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class TestServer {
 
     public static void main(String[] args) throws InterruptedException {
+
         /**
          * 基于NIO的事件循环组
          * bossGroup接收连接，把接收到的链接发送给workerGroup，相当于老板
