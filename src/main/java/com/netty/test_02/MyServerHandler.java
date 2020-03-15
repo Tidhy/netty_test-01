@@ -10,6 +10,12 @@ import java.util.UUID;
  */
 public class MyServerHandler extends SimpleChannelInboundHandler<String> {
 
+    /**
+     * 此方法被调用之后，服务端会向客户端发送条数据
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         System.out.println(ctx.channel().remoteAddress() + "," + msg);
