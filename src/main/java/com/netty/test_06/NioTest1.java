@@ -7,7 +7,7 @@ import java.security.SecureRandom;
  * 此类说明了nio是双向的，既可以读数据。又可以写数据，其中buffer.flip();为翻转数据的操作
  */
 public class NioTest1 {
-35
+
     public static void main(String[] args) {
         IntBuffer buffer = IntBuffer.allocate(10);
         //capacity 缓冲区大小
